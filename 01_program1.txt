@@ -1,0 +1,55 @@
+-- 
+-- Roll No: 01
+-- Name:Aarathy ps
+-- Program:
+-- 
+
+
+--
+-- Table structure for table employee
+--
+
+create table employee(ssn int primary key,name varchar(10),address varchar(20),dnum char(5));
+alter table employee  add super_ssn int;
+alter table employee add constraint employee_super_ssn_fkey foreign key(super_ssn) references employee(ssn);
+alter table employee add constraint employee_dnum_fkey foreign key(dnum) references dept(dno);
+
+--
+-- Table structure for table dept
+--
+
+create table dept(dno char(5) primary key,dname varchar(10) unique,location varchar(15));
+alter table dept add mgr_ssn int;
+alter table dept add constraint dept_mgr_ssn_fkey foreign key(mgr_ssn) references employee(ssn);
+
+
+--
+-- Dumping data for table employee
+--
+
+insert into employee values(1,"Ammu","pk house",01);
+insert into employee values(2,"Appu","kp house",02);
+insert into employee values(3,"Binu","A house",03);
+insert into employee values(4,"pappu","B house",03);
+insert into employee values(5,"Minnu","c house",04);
+
+
+--
+-- Dumping data for table dept
+--
+
+insert into dept values(01,"sales","kkm");
+insert into dept values(02,"office","Thrissur");
+insert into dept values(03,"Developer","Edappal");
+insert into dept values(04,"HR","Edappal");
+insert into dept values(05,"Qc","Kuttipuram");
+
+
+
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
