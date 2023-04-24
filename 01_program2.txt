@@ -1,0 +1,103 @@
+-- 
+-- Roll No: 01
+-- Name: Aarathy p s
+-- Program: 
+-- 
+
+
+
+--
+-- Table structure for table dept
+--
+
+create table dept(dno char(5) primary key,dname varchar(10) unique,location varchar(15));
+alter table dept add mgr_ssn int;
+alter table dept add constraint dept_mgr_ssn_fkey foreign key(mgr_ssn) references employee(ssn);
+alter table dept add mgr_start_date date;
+
+
+--
+-- Table structure for table employee
+--
+
+create table employee(ssn int primary key,name varchar(10),address varchar(20),dnum char(5));
+alter table employee add super_ssn int;
+alter table employee add constraint employee_super_ssn_fkey foreign key(super_ssn) references employee(ssn);
+alter table employee add constraint employee_dnum_fkey foreign key(dnum) references dept(dno);
+alter table employee add salary int check(salary>20000 and salary<60000);
+
+
+--
+-- Table structure for table project
+--
+
+create table project(pnumber int primary key,pname varchar(10),plocation varchar(15),dnum char(5),constraint project_dnum_fkey foreign key(dnum) references dept(dno));
+
+--
+-- Table structure for table workson
+--
+
+create table workson(essn int,pno int,hours float(3,1),primary key(essn,pno),constraint  workson_essn_fkey foreign key(essn) references employee(ssn),constraint workson_pno_fkey foreign key(pno) references project(pnumber));
+
+
+--
+-- Dumping data for table dept
+--
+
+insert into dept(dno,dname,location,mgr_ssn)values(01,"sales","kkm",1);
+insert into dept(dno,dname,location,mgr_ssn)values(02,"office","Thrissur",2);
+insert into dept(dno,dname,location,mgr_ssn)values(03,"Developer","Edappal",3);
+insert into dept(dno,dname,location,mgr_ssn)values(04,"HR","Edappal",4);
+insert into dept(dno,dname,location,mgr_ssn)values(05,"Qc","Kuttipuram",5);
+update dept set mgr_start_date='2022-04-19' where dno=1;
+update dept set mgr_start_date='2022-04-20' where dno=2;
+update dept set mgr_start_date='2022-04-21' where dno=3;
+update dept set mgr_start_date='2022-04-22' where dno=4;
+update dept set mgr_start_date='2022-04-23' where dno=5;
+
+
+--
+-- Dumping data for table employee
+--
+
+insert into employee(ssn,name,address,dnum,super_ssn)values(1,"Ammu","pk house",01,1);
+insert into employee(ssn,name,address,dnum,super_ssn)values(2,"Appu","kp house",02,2);
+insert into employee(ssn,name,address,dnum,super_ssn)values(3,"Binu","A house",03,3);
+insert into employee(ssn,name,address,dnum,super_ssn)values(4,"pappu","B house",03,4);
+insert into employee(ssn,name,address,dnum,super_ssn)values(5,"Minnu","c house",04,5);
+update employee set salary=25000 where ssn=1;
+update employee set salary=30000 where ssn=2;
+update employee set salary=35000 where ssn=3;
+update employee set salary=50000 where ssn=4;
+update employee set salary=45000 where ssn=5;
+
+
+--
+-- Dumping data for table project
+--
+
+insert into project values(100,"p1","kunnamkulam",1);
+insert into project values(101,"p2","Thrissur",2);
+insert into project values(103,"p3","Edl",3);
+insert into project values(104,"p4","Edl",4);
+insert into project values(105,"p5","ktm",5);
+
+--
+-- Dumping data for table workson
+--
+
+insert into workson values(1,100,22.1);
+insert into workson values(2,101,22.2);
+insert into workson values(3,103,24.3);
+insert into workson values(4,104,20.1);
+insert into workson values(5,105,25.5);
+
+
+
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
